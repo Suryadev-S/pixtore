@@ -1,0 +1,5 @@
+added dependencies: clerk, react-query, shadcn.
+
+todo: 
+-Create Nav and test clerk.(done)
+-create the page to create post, i.e form.
