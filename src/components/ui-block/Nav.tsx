@@ -6,18 +6,20 @@ import {
     NavigationMenu, NavigationMenuContent, NavigationMenuIndicator, NavigationMenuItem, NavigationMenuLink, NavigationMenuList, NavigationMenuTrigger, NavigationMenuViewport,
 } from "@/components/ui/navigation-menu"
 import { navigationMenuTriggerStyle } from "@/components/ui/navigation-menu"
-
+import { House } from 'lucide-react';
+import { Pen } from 'lucide-react';
+import { LogIn } from 'lucide-react';
 import Link from "next/link";
 
 
 const Nav = () => {
     return (
-        <NavigationMenu>
+        <NavigationMenu className='bg-slate-800 py-1'>
             <NavigationMenuList>
                 <NavigationMenuItem>
                     <Link href="/" legacyBehavior passHref>
                         <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                            Home
+                            <House />
                         </NavigationMenuLink>
                     </Link>
                 </NavigationMenuItem>
@@ -31,7 +33,7 @@ const Nav = () => {
                 <NavigationMenuItem>
                     <Link href="/create" legacyBehavior passHref>
                         <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                            Create
+                            <Pen />
                         </NavigationMenuLink>
                     </Link>
                 </NavigationMenuItem>
@@ -42,7 +44,9 @@ const Nav = () => {
                 </NavigationMenuItem>
                 <NavigationMenuItem>
                     <SignedOut>
-                        <SignInButton />
+                        <SignInButton>
+                            <LogIn />
+                        </SignInButton>
                     </SignedOut>
                 </NavigationMenuItem>
             </NavigationMenuList>

@@ -5,9 +5,11 @@ import { useAuth } from "@clerk/nextjs";
 import { Skeleton } from "@/components/ui/skeleton"
 import { Post } from "@/lib/types";
 import { Key } from "react";
+import { useRouter } from "next/router";
 
 
 export default function Home() {
+  // const router = useRouter();
   const { isLoaded, userId } = useAuth();
   const query = useQueryPost();
   if (!isLoaded || !userId) {
