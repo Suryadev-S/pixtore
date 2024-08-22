@@ -6,5 +6,5 @@ export interface Post {
     assetPublicId: string;
     title: string;
     description: string;
-    albumId: string | null;
+    albumId?: string | null;
 }

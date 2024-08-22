@@ -8,6 +8,10 @@ const postSchema = new Schema({
     avatarUrl: String,
     assetUrl: String,
     assetPublicId: String,
+    isPrivate: {
+        type: Boolean,
+        default: false,
+    },
     albumId: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "Album",
