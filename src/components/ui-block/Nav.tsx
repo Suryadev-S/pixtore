@@ -1,5 +1,5 @@
 import {
-    SignInButton, SignedIn, SignedOut, UserButton
+    SignInButton, SignedIn, SignedOut, UserButton, SignUpButton
 } from '@clerk/nextjs'
 
 import {
@@ -47,6 +47,13 @@ const Nav = () => {
                         <SignInButton>
                             <LogIn />
                         </SignInButton>
+                    </SignedOut>
+                </NavigationMenuItem>
+                <NavigationMenuItem>
+                    <SignedOut>
+                        <SignUpButton>
+                            Signup
+                        </SignUpButton>
                     </SignedOut>
                 </NavigationMenuItem>
             </NavigationMenuList>

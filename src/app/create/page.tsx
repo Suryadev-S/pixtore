@@ -87,7 +87,7 @@ const Create = () => {
                             <FormItem>
                                 <FormLabel>Title</FormLabel>
                                 <FormControl>
-                                    <Input placeholder="title" {...field} />
+                                    <Input placeholder="title" {...field} className="text-black"/>
                                 </FormControl>
                                 <FormDescription>
                                     choose a good title for your post
@@ -103,7 +103,7 @@ const Create = () => {
                             <FormItem>
                                 <FormLabel>Description</FormLabel>
                                 <FormControl>
-                                    <Input placeholder="description" {...field} />
+                                    <Input placeholder="description" {...field} className="text-black"/>
                                 </FormControl>
                                 <FormDescription>
                                     describe your post to let others know more about it.

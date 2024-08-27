@@ -7,6 +7,7 @@ import { Post } from "@/lib/types";
 import { Key, useEffect } from "react";
 // import { useRouter } from "next/router";
 import { useRouter } from "next/navigation";
+import PreviewCard from "@/components/ui/custom/PreviewCard";
 
 
 export default function Home() {
@@ -35,18 +36,22 @@ export default function Home() {
   }
 
   return (
-    <main>
+    <main className="wrapper">
       {query.data.length == 0 &&
         (
           <div>No posts as of now</div>
         )
       }
       {query.data.length > 0 &&
-        (
-          query.data.map((post: Post, i: Key) => (
-            <div key={i}>post{i}</div>
-          ))
-        )
+        <ul className="preview-list">
+          {
+            query.data.map((post: Post, i: Key) => (
+              <li key={i}>
+                <PreviewCard post={post} />
+              </li>
+            ))
+          }
+        </ul>
       }
     </main>
   );

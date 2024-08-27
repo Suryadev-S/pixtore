@@ -63,7 +63,24 @@
   * {
     @apply border-border;
   }
+
   body {
-    @apply bg-slate-900 text-white
+    @apply bg-slate-900 text-white h-screen
+  }
+}
+
+@layer utilities {
+  .preview-list {
+    display: grid;
+    gap: 32px;
+  }
+
+  .wrapper {
+    display: grid;
+    grid-template-columns: 1fr 350px 1fr;
+  }
+
+  .wrapper>* {
+    grid-column-start: 2;
   }
 }

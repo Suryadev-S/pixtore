@@ -1,4 +1,5 @@
 export interface Post {
+    _id?: string; 
     userId: string | undefined;
     username: string | null | undefined;
     avatarUrl: string | undefined;
@@ -7,4 +8,11 @@ export interface Post {
     title: string;
     description: string;
     albumId?: string | null;
+    isLiked?: boolean
+}
+
+export interface Like{
+    _id?: string,
+    userId: string | undefined,
+    postId: string | undefined
 }

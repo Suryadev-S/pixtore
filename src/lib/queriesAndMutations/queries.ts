@@ -4,7 +4,7 @@ export const useQueryPost = () => {
     const query = useQuery({
         queryKey: ['userPosts'],
         queryFn: async () => {
-            const res = await fetch('/api/post');
+            const res = await fetch('/api/posts');
             const data = await res.json();
             return data;
         }
