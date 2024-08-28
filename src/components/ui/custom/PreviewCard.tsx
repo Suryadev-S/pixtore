@@ -1,31 +1,42 @@
 import { Like, Post } from '@/lib/types';
 import { CldImage } from 'next-cloudinary';
 import { Heart, Ellipsis } from 'lucide-react';
-import { useLikePost } from '@/lib/queriesAndMutations/mutations';
+import { useDeletePost, useLikePost } from '@/lib/queriesAndMutations/mutations';
 import { toast } from '../use-toast';
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import {
     DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
-import { Button } from '../button';
 
 
 
 export default function PreviewCard({ post }: { post: Post }) {
     const triggerLike = useLikePost();
+    const handleDeletePost = useDeletePost();
     const handleLikePost = (like: Like) => {
         triggerLike.mutate(like);
-        if (triggerLike.error) {
-            toast({
-                variant: "destructive",
-                title: "error in like"
-            })
-            return
-        }
-        toast({
-            title: "liked the post"
-        })
+        // if (triggerLike.error) {
+        //     toast({
+        //         variant: "destructive",
+        //         title: "error in like"
+        //     })
+        //     return
+        // }
+        // toast({
+        //     title: "liked the post"
+        // })
     }
+    // if (handleDeletePost.isSuccess) {
+    //     toast({
+    //         title: "post deleted"
+    //     })
+    // }
+    // if (handleDeletePost.isError) {
+    //     toast({
+    //         variant: "destructive",
+    //         title: "error in deleting"
+    //     })
+    // }
     return (
         <div className="inline-block">
             <header className='text-slate-500 flex items-center gap-4 bg-slate-800 py-2 px-4'>
@@ -39,8 +50,8 @@ export default function PreviewCard({ post }: { post: Post }) {
                 <DropdownMenu>
                     <DropdownMenuTrigger><Ellipsis /></DropdownMenuTrigger>
                     <DropdownMenuContent className="border-2 border-slate-600 bg-slate-800 text-white">
-                        <DropdownMenuItem className=''>
-                           delete
+                        <DropdownMenuItem onClick={() => handleDeletePost.mutate({ postId: post._id, assetPublicId: post.assetPublicId })}>
+                            {handleDeletePost.isPending ? "deleting" : "delete"}
                         </DropdownMenuItem>
                     </DropdownMenuContent>
                 </DropdownMenu>

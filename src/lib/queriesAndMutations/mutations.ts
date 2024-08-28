@@ -73,3 +73,38 @@ export const useLikePost = () => {
 
     return mutation;
 }
+
+export const useDeletePost = () => {
+    const queryClient = useQueryClient();
+    const mutation = useMutation({
+        mutationFn: async ({ postId, assetPublicId }: { postId: string | undefined, assetPublicId: string }) => {
+            const res = await fetch(`/api/posts/${postId}?assetPublicId=${assetPublicId}`, {
+                method: 'DELETE'
+            })
+            const data = await res.json();
+            return data;
+        },
+        onMutate: ({ postId, assetPublicId }: { postId: string | undefined, assetPublicId: string }) => {
+            const prevList = queryClient.getQueryData(["userPosts"]);
+
+            queryClient.setQueryData(["userPosts"], (old: Post[]) => {
+                const updatedList = old.filter(post => post._id !== postId);
+                return updatedList;
+            });
+
+            return { prevList };
+        },
+        onError: (error, postId, context) => {
+            console.log(error);
+            queryClient.setQueryData(["userPosts"], context?.prevList);
+        },
+        onSettled: () => {
+            queryClient.invalidateQueries({
+                queryKey: ["userPosts"]
+            })
+        }
+
+    })
+
+    return mutation;
+}
