@@ -65,7 +65,8 @@
   }
 
   body {
-    @apply bg-slate-900 text-white h-screen
+    @apply bg-slate-900 text-white h-screen;
+    background-image: url('../../public/icon-pattern.png');
   }
 }
 
@@ -73,6 +74,7 @@
   .preview-list {
     display: grid;
     gap: 32px;
+    padding-bottom: 60px;
   }
 
   .wrapper {
@@ -82,5 +84,11 @@
 
   .wrapper>* {
     grid-column-start: 2;
+  }
+}
+
+@media screen and (min-width: 500px) {
+  .wrapper{
+    grid-template-columns: 1fr 400px 1fr;
   }
 }

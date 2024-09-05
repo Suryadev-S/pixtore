@@ -5,7 +5,7 @@ import ReactQueryProvider from '@/lib/reactQueryProvider/provider';
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import Nav from '@/components/ui-block/Nav';
+import Nav from '@/components/ui/custom/Nav';
 import { Toaster } from "@/components/ui/toaster"
 
 const inter = Inter({ subsets: ["latin"] });

@@ -2,26 +2,17 @@
 
 import { useQueryPost } from "@/lib/queriesAndMutations/queries";
 import { useAuth } from "@clerk/nextjs";
-import { Skeleton } from "@/components/ui/skeleton"
 import { Post } from "@/lib/types";
 import { Key, useEffect } from "react";
-// import { useRouter } from "next/router";
 import { useRouter } from "next/navigation";
 import PreviewCard from "@/components/ui/custom/PreviewCard";
+import Loader from "@/components/ui/custom/Loader";
 
 
 export default function Home() {
   const router = useRouter();
   const { isLoaded, userId } = useAuth();
   const query = useQueryPost();
-  // if (!isLoaded || !userId) {
-  //   return (
-  //     <div>
-  //       user data not loaded yet or no userId
-  //     </div>
-  //   )
-  //   router.push('/testPage');
-  // }
 
   useEffect(() => {
     if (!isLoaded || !userId) {
@@ -31,7 +22,7 @@ export default function Home() {
 
   if (query.isLoading) {
     return (
-      <Skeleton className="w-[100px] h-[20px] rounded-full" />
+      <Loader fillCount={3} className="w-[350px] mx-auto grid gap-4"/>
     )
   }
 

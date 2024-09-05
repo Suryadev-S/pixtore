@@ -1,5 +1,5 @@
-import { useMutation, useQueryClient } from "@tanstack/react-query"
-import { Post, Like } from "../types";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
+import { Post, Like, Comment } from "../types";
 
 
 
@@ -107,4 +107,40 @@ export const useDeletePost = () => {
     })
 
     return mutation;
+}
+
+export const useCreateComment = () => {
+    const queryClient = useQueryClient();
+    const mutate = useMutation({
+        mutationFn: async (userComment: Comment) => {
+            const res = await fetch('/api/comments', {
+                method: 'POST',
+                headers: {
+                    "Content-type": "application/json"
+                },
+                body: JSON.stringify(userComment)
+            });
+            const data = await res.json();
+            return data;
+        },
+        onMutate: (userComment: Comment) => {
+            const previous = queryClient.getQueryData(['userComments', userComment.postId]);
+            queryClient.setQueryData(['userComments',userComment.postId],(old: Comment[])=>{
+                const updatedList = [userComment, ...old];
+                return updatedList;
+            })
+            return { previous }
+        },
+        onError: (error, userComment: Comment, context) => {
+            console.log(error);
+            queryClient.setQueryData(['userComments', userComment.postId], context?.previous);
+        },
+        onSettled: (userComment) => {
+            queryClient.invalidateQueries({
+                queryKey: ['userComments', userComment.postId]
+            })
+        }
+    });
+
+    return mutate;
 }

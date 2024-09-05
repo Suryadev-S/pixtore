@@ -1,42 +1,35 @@
 import { Like, Post } from '@/lib/types';
 import { CldImage } from 'next-cloudinary';
-import { Heart, Ellipsis } from 'lucide-react';
+import { Heart, Ellipsis, MessageCircle } from 'lucide-react';
 import { useDeletePost, useLikePost } from '@/lib/queriesAndMutations/mutations';
 import { toast } from '../use-toast';
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import {
     DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
+import { useState } from 'react';
+import { useGetComment } from '@/lib/queriesAndMutations/queries';
+import CommentSection from './CommentSection';
 
 
 
 export default function PreviewCard({ post }: { post: Post }) {
+    const [commentSection, setCommentSection] = useState(false);
+    const { data: comments, refetch, isLoading } = useGetComment(post._id);
     const triggerLike = useLikePost();
     const handleDeletePost = useDeletePost();
+
+    const toggleCommentSection = () => {
+        setCommentSection(!commentSection);
+        if (!commentSection) {
+            refetch();
+            return;
+        }
+        return;
+    }
     const handleLikePost = (like: Like) => {
         triggerLike.mutate(like);
-        // if (triggerLike.error) {
-        //     toast({
-        //         variant: "destructive",
-        //         title: "error in like"
-        //     })
-        //     return
-        // }
-        // toast({
-        //     title: "liked the post"
-        // })
     }
-    // if (handleDeletePost.isSuccess) {
-    //     toast({
-    //         title: "post deleted"
-    //     })
-    // }
-    // if (handleDeletePost.isError) {
-    //     toast({
-    //         variant: "destructive",
-    //         title: "error in deleting"
-    //     })
-    // }
     return (
         <div className="inline-block">
             <header className='text-slate-500 flex items-center gap-4 bg-slate-800 py-2 px-4'>
@@ -58,7 +51,7 @@ export default function PreviewCard({ post }: { post: Post }) {
 
             </header>
             <div className='bg-black'>
-                <div className='relative aspect-square w-[350px]'>
+                <div className='relative aspect-square md:w-[400px] w-[350px]'>
                     <CldImage
                         // width="400"
                         // height="0"
@@ -71,10 +64,14 @@ export default function PreviewCard({ post }: { post: Post }) {
             </div>
             <div className='px-2 py-2'>
                 <Heart className={`${post.isLiked ? "fill-red-400" : "stroke-slate-600"}`} onClick={() => handleLikePost({ userId: post.userId, postId: post._id })} />
+                <MessageCircle onClick={toggleCommentSection} />
             </div>
-            <div className='text-slate-500'>
+            <div className='text-slate-500 mb-2'>
                 <b>{post.title}</b> <span>{post.description}</span>
             </div>
+            {commentSection && (
+                <CommentSection comments={comments} isLoading={isLoading} postId={post._id} />
+            )}
         </div>
     )
 }
