@@ -3,7 +3,7 @@ import {
 } from '@clerk/nextjs'
 
 import {
-    NavigationMenu, NavigationMenuContent, NavigationMenuIndicator, NavigationMenuItem, NavigationMenuLink, NavigationMenuList, NavigationMenuTrigger, NavigationMenuViewport,
+    NavigationMenu, NavigationMenuItem, NavigationMenuLink, NavigationMenuList,
 } from "@/components/ui/navigation-menu"
 import { navigationMenuTriggerStyle } from "@/components/ui/navigation-menu"
 import { House, User, Pen, LogIn, UserCheck } from 'lucide-react';
@@ -25,13 +25,6 @@ const Nav = () => {
                         </NavigationMenuLink>
                     </Link>
                 </NavigationMenuItem>
-                {/* <NavigationMenuItem>
-                    <Link href="/testPage" legacyBehavior passHref>
-                        <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                            test page
-                        </NavigationMenuLink>
-                    </Link>
-                </NavigationMenuItem> */}
                 <NavigationMenuItem>
                     <Link href="/create" legacyBehavior passHref>
                         <NavigationMenuLink className={navigationMenuTriggerStyle()}>

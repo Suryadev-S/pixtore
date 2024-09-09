@@ -1,4 +1,4 @@
-import { Key, useState } from "react"
+import { Key, } from "react"
 import { Skeleton } from "../skeleton"
 
 interface LoaderProps {

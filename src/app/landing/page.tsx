@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/button";
+import { SignUpButton } from "@clerk/nextjs";
 
 const Test = () => {
     return (
@@ -6,7 +7,9 @@ const Test = () => {
             <div className="grid md:grid-cols-2 items-center">
                 <div className="p-10">
                     <h1 className="text-6xl font-bold tracking-wider uppercase w-min">Come Imagine Ideas</h1>
-                    <Button className="bg-sky-500">Get Started</Button>
+                    <SignUpButton>
+                        <Button className="bg-sky-500">Get Started</Button>
+                    </SignUpButton>
                 </div>
                 <div>
                     <img src="landingHero.svg" />

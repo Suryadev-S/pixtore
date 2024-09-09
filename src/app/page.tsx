@@ -16,7 +16,7 @@ export default function Home() {
 
   useEffect(() => {
     if (!isLoaded || !userId) {
-      router.push("/testPage");
+      router.push("/landing");
     }
   }, [])
 

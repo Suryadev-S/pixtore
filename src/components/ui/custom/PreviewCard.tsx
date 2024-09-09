@@ -2,7 +2,6 @@ import { Like, Post } from '@/lib/types';
 import { CldImage } from 'next-cloudinary';
 import { Heart, Ellipsis, MessageCircle } from 'lucide-react';
 import { useDeletePost, useLikePost } from '@/lib/queriesAndMutations/mutations';
-import { toast } from '../use-toast';
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import {
     DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger,
