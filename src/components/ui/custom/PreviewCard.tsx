@@ -40,29 +40,26 @@ export default function PreviewCard({ post }: { post: Post }) {
                 <small className='mr-auto'>
                     <b>@{post.username}</b>
                 </small>
-                <DropdownMenu>
+                {/* <DropdownMenu>
                     <DropdownMenuTrigger><Ellipsis /></DropdownMenuTrigger>
                     <DropdownMenuContent className="border-2 border-slate-600 bg-slate-800 text-white">
                         <DropdownMenuItem onClick={() => handleDeletePost.mutate({ postId: post._id, assetPublicId: post.assetPublicId })}>
                             {handleDeletePost.isPending ? "deleting" : "delete"}
                         </DropdownMenuItem>
                     </DropdownMenuContent>
-                </DropdownMenu>
+                </DropdownMenu> */}
 
             </header>
-            <div className='bg-black'>
-                <div className='relative aspect-square md:w-[400px] w-[350px]'>
-                    <CldImage
-                        // width="400"
-                        // height="0"
-                        fill
-                        src={post.assetPublicId}
-                        alt={post.title}
-                        className='object-contain'
-                    />
-                </div>
+
+            <div className='relative aspect-square md:w-[400px] w-[350px] bg-black'>
+                <CldImage
+                    fill
+                    src={post.assetPublicId}
+                    alt={post.title}
+                    className='object-contain'
+                />
             </div>
-            <div className='px-2 py-2'>
+            <div className='px-2 py-2 flex gap-2'>
                 <Heart className={`${post.isLiked ? "fill-red-400" : "stroke-slate-600"}`} onClick={() => handleLikePost({ userId: post.userId, postId: post._id })} />
                 <MessageCircle onClick={toggleCommentSection} />
             </div>

@@ -67,12 +67,13 @@ const Create = () => {
         return
     }
     return (
-        <div>
+        <div className="wrapper">
+            <img src='uploadBro.svg' className="w-[250px] mx-auto md:w-full"/>
             <CldUploadWidget uploadPreset="media_preset"
                 onSuccess={handleUploadSuccess}>
                 {({ open }) => {
                     return (
-                        <Button onClick={() => open()}>
+                        <Button onClick={() => open()} className="mb-4">
                             upload
                         </Button>
                     );
@@ -85,9 +86,9 @@ const Create = () => {
                         name="title"
                         render={({ field }) => (
                             <FormItem>
-                                <FormLabel>Title</FormLabel>
+                                <FormLabel className="text-slate-400 text-lg">Title</FormLabel>
                                 <FormControl>
-                                    <Input placeholder="title" {...field} className="text-black"/>
+                                    <Input placeholder="title" {...field} className="text-black" />
                                 </FormControl>
                                 <FormDescription>
                                     choose a good title for your post
@@ -101,9 +102,9 @@ const Create = () => {
                         name="description"
                         render={({ field }) => (
                             <FormItem>
-                                <FormLabel>Description</FormLabel>
+                                <FormLabel className="text-slate-400 text-lg">Description</FormLabel>
                                 <FormControl>
-                                    <Input placeholder="description" {...field} className="text-black"/>
+                                    <Input placeholder="description" {...field} className="text-black" />
                                 </FormControl>
                                 <FormDescription>
                                     describe your post to let others know more about it.

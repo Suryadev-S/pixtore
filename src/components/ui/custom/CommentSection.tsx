@@ -37,7 +37,7 @@ const CommentSection = ({ comments, isLoading, postId }: { comments: Comment[], 
                     placeholder="write your thoughts"
                     value={inputComment}
                     onChange={handleChange} />
-                <Button size={'icon'} className="bg-sky-600" onClick={handleCreateComment}><SendHorizontal /></Button>
+                <Button size={'icon'} className="bg-sky-600" onClick={handleCreateComment}><SendHorizontal className="stroke-1"/></Button>
             </div>
             {isLoading ?
                 (

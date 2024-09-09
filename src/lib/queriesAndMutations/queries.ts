@@ -1,5 +1,18 @@
 import { useQuery } from "@tanstack/react-query"
 
+export const useHome = () =>{
+    const query = useQuery({
+        queryKey: ['homeFeed'],
+        queryFn: async () => {
+            const res = await fetch('/api/posts?page=home');
+            const data = await res.json();
+            return data;
+        }
+    })
+
+    return query;
+}
+
 export const useQueryPost = () => {
     const query = useQuery({
         queryKey: ['userPosts'],
@@ -26,3 +39,4 @@ export const useGetComment = (postId: string | undefined) => {
 
     return query;
 }
+

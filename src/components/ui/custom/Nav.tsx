@@ -6,60 +6,86 @@ import {
     NavigationMenu, NavigationMenuContent, NavigationMenuIndicator, NavigationMenuItem, NavigationMenuLink, NavigationMenuList, NavigationMenuTrigger, NavigationMenuViewport,
 } from "@/components/ui/navigation-menu"
 import { navigationMenuTriggerStyle } from "@/components/ui/navigation-menu"
-import { House } from 'lucide-react';
-import { Pen } from 'lucide-react';
-import { LogIn } from 'lucide-react';
+import { House, User, Pen, LogIn, UserCheck } from 'lucide-react';
 import Link from "next/link";
+import React from 'react';
 
 
 const Nav = () => {
     return (
-        <NavigationMenu className='bg-slate-800 py-1'>
+        <NavigationMenu className='bg-slate-800 py-1' >
             <NavigationMenuList>
                 <NavigationMenuItem>
                     <Link href="/" legacyBehavior passHref>
                         <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                            <House />
+                            <div className='grid place-items-center'>
+                                <House />
+                                <small>home</small>
+                            </div>
                         </NavigationMenuLink>
                     </Link>
                 </NavigationMenuItem>
-                <NavigationMenuItem>
+                {/* <NavigationMenuItem>
                     <Link href="/testPage" legacyBehavior passHref>
                         <NavigationMenuLink className={navigationMenuTriggerStyle()}>
                             test page
                         </NavigationMenuLink>
                     </Link>
-                </NavigationMenuItem>
+                </NavigationMenuItem> */}
                 <NavigationMenuItem>
                     <Link href="/create" legacyBehavior passHref>
                         <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                            <Pen />
+                            <div className='grid place-items-center'>
+                                <Pen />
+                                <small>create</small>
+                            </div>
                         </NavigationMenuLink>
                     </Link>
                 </NavigationMenuItem>
-                <NavigationMenuItem>
-                    <SignedIn>
+                <SignedIn>
+                    <NavigationMenuItem>
+                        <Link href="/profile" legacyBehavior passHref>
+                            <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+                                <div className='grid place-items-center'>
+                                    <User />
+                                    <small>Profile</small>
+                                </div>
+                            </NavigationMenuLink>
+                        </Link>
+                    </NavigationMenuItem>
+                    <NavigationMenuItem>
+                        <NavigationMenuLink>
                         <UserButton />
-                    </SignedIn>
-                </NavigationMenuItem>
-                <NavigationMenuItem>
-                    <SignedOut>
+                        </NavigationMenuLink>
+                    </NavigationMenuItem>
+                </SignedIn>
+                <SignedOut>
+                    <NavigationMenuItem>
                         <SignInButton>
-                            <LogIn />
+                            <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+                                <div className='grid place-items-center'>
+                                    <LogIn />
+                                    <small>login</small>
+                                </div>
+                            </NavigationMenuLink>
                         </SignInButton>
-                    </SignedOut>
-                </NavigationMenuItem>
-                <NavigationMenuItem>
-                    <SignedOut>
+                    </NavigationMenuItem>
+                    <NavigationMenuItem>
                         <SignUpButton>
-                            Signup
+                            <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+                                <div className='grid place-items-center'>
+                                    <UserCheck />
+                                    <small>SignUp</small>
+                                </div>
+                            </NavigationMenuLink>
                         </SignUpButton>
-                    </SignedOut>
-                </NavigationMenuItem>
+                    </NavigationMenuItem>
+                </SignedOut>
             </NavigationMenuList>
         </NavigationMenu>
 
     )
 }
+
 
 export default Nav;
