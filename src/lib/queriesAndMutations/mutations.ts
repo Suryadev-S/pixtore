@@ -45,9 +45,9 @@ export const useLikePost = () => {
             return data;
         },
         onMutate: (like) => {
-            const prevListState = queryClient.getQueryData(['userPosts']);
+            const prevListState = queryClient.getQueryData(['homeFeed']);
 
-            queryClient.setQueryData(['userPosts'], (old: Post[]) => {
+            queryClient.setQueryData(['homeFeed'], (old: Post[]) => {
                 const updatedPosts = old.map((post) => {
                     if (post._id === like.postId) {
                         return { ...post, isLiked: !post.isLiked }
@@ -62,11 +62,11 @@ export const useLikePost = () => {
         },
         onError: (err, like, context) => {
             alert("error in like mutation");
-            queryClient.setQueryData(['userPosts'], context?.prevListState);
+            queryClient.setQueryData(['homeFeed'], context?.prevListState);
         },
         onSettled: () => {
             queryClient.invalidateQueries({
-                queryKey: ["userPosts"]
+                queryKey: ["homeFeed"]
             })
         }
     })

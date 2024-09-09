@@ -9,12 +9,14 @@ import {
 import { useState } from 'react';
 import { useGetComment } from '@/lib/queriesAndMutations/queries';
 import CommentSection from './CommentSection';
+import { useUser } from '@clerk/nextjs';
 
 
 
 export default function PreviewCard({ post }: { post: Post }) {
     const [commentSection, setCommentSection] = useState(false);
     const { data: comments, refetch, isLoading } = useGetComment(post._id);
+    const { user } = useUser();
     const triggerLike = useLikePost();
     const handleDeletePost = useDeletePost();
 
@@ -59,7 +61,7 @@ export default function PreviewCard({ post }: { post: Post }) {
                 />
             </div>
             <div className='px-2 py-2 flex gap-2'>
-                <Heart className={`${post.isLiked ? "fill-red-400" : "stroke-slate-600"}`} onClick={() => handleLikePost({ userId: post.userId, postId: post._id })} />
+                <Heart className={`${post.isLiked ? "fill-red-400" : "stroke-slate-600"}`} onClick={() => handleLikePost({ userId: user?.id, postId: post._id })} />
                 <MessageCircle onClick={toggleCommentSection} />
             </div>
             <div className='text-slate-500 mb-2'>
